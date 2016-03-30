@@ -1,11 +1,13 @@
 package co.edu.poli.cnt.simulador.servicio.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 /**
@@ -28,6 +30,8 @@ public class OpcionRespuestaEntity implements Serializable {
     private int orden;
     @Transient
     private boolean elegida;
+    @ManyToOne
+    private PreguntaEntity pregunta;
 
     /**
      * Califica la opción de respuesta.
@@ -80,29 +84,57 @@ public class OpcionRespuestaEntity implements Serializable {
         this.orden = orden;
     }
 
+    public PreguntaEntity getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(PreguntaEntity pregunta) {
+        this.pregunta = pregunta;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.contenido);
+        hash = 97 * hash + (this.opcionCorrecta ? 1 : 0);
+        hash = 97 * hash + this.orden;
+        hash = 97 * hash + (this.elegida ? 1 : 0);
+        hash = 97 * hash + Objects.hashCode(this.pregunta);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OpcionRespuestaEntity)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        OpcionRespuestaEntity other = (OpcionRespuestaEntity) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OpcionRespuestaEntity other = (OpcionRespuestaEntity) obj;
+        if (this.opcionCorrecta != other.opcionCorrecta) {
+            return false;
+        }
+        if (this.orden != other.orden) {
+            return false;
+        }
+        if (this.elegida != other.elegida) {
+            return false;
+        }
+        if (!Objects.equals(this.contenido, other.contenido)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.pregunta, other.pregunta)) {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "OpcionRespuestaEntity{" + "id=" + id + ", contenido=" + contenido + ", opcionCorrecta=" + opcionCorrecta + ", orden=" + orden + ", elegida=" + elegida + '}';
     }
 
 }

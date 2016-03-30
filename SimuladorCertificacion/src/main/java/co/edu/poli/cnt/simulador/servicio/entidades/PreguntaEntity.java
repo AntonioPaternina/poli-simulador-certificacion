@@ -33,7 +33,7 @@ public class PreguntaEntity implements Serializable {
     private String fragmentoCodigo;
     @Enumerated(EnumType.STRING)
     private TipoPregunta tipoPregunta;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pregunta")
     @NotEmpty
     private List<OpcionRespuestaEntity> opcionesRespuesta;
 
