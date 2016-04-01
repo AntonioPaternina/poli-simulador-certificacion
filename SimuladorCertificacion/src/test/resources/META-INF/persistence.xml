@@ -4,9 +4,8 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>co.edu.poli.cnt.simulador.servicio.entidades.OpcionRespuestaEntity</class>
         <class>co.edu.poli.cnt.simulador.servicio.entidades.PreguntaEntity</class>
-    
-        <properties>      
-      
+        <class>co.edu.poli.cnt.simulador.servicio.entidades.TemaCertificacionEntity</class>
+        <properties>
             <!-- DEV -->
             <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/simulador;create=true"/>
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
@@ -17,7 +16,6 @@
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
             <property name="javax.persistence.schema-generation.database.action" value="create"/>
             -->
-      
             <!-- Otras -->
             <property name="javax.persistence.jdbc.user" value="app"/>
             <property name="javax.persistence.jdbc.password" value="app"/>

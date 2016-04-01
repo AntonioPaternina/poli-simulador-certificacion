@@ -4,6 +4,7 @@ import co.edu.poli.cnt.simulador.servicio.excepciones.OpcionRespuestaNoExisteExc
 import co.edu.poli.cnt.simulador.servicio.excepciones.PreguntaInvalidaException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -28,7 +30,9 @@ public class PreguntaEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Lob
-    private String contenido;
+    private String textoInicio;
+    @Lob
+    private String textoFin;
     @Lob
     private String fragmentoCodigo;
     @Enumerated(EnumType.STRING)
@@ -36,6 +40,8 @@ public class PreguntaEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pregunta")
     @NotEmpty
     private List<OpcionRespuestaEntity> opcionesRespuesta;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<TemaCertificacionEntity> temasCertificacion;
 
     /**
      * Califica la pregunta al determinar si la(s) respuesta(s) escogida(s) es
@@ -122,12 +128,20 @@ public class PreguntaEntity implements Serializable {
         this.id = id;
     }
 
-    public String getContenido() {
-        return contenido;
+    public String getTextoInicio() {
+        return textoInicio;
     }
 
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
+    public void setTextoInicio(String contenido) {
+        this.textoInicio = contenido;
+    }
+
+    public String getTextoFin() {
+        return textoFin;
+    }
+
+    public void setTextoFin(String textoFin) {
+        this.textoFin = textoFin;
     }
 
     public String getFragmentoCodigo() {
@@ -154,26 +168,42 @@ public class PreguntaEntity implements Serializable {
         this.opcionesRespuesta = opcionesRespuesta;
     }
 
+    public List<TemaCertificacionEntity> getTemasCertificacion() {
+        return temasCertificacion;
+    }
+
+    public void setTemasCertificacion(List<TemaCertificacionEntity> temasCertificacion) {
+        this.temasCertificacion = temasCertificacion;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PreguntaEntity)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        PreguntaEntity other = (PreguntaEntity) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PreguntaEntity other = (PreguntaEntity) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "PreguntaEntity{" + "id=" + id + ", contenido=" + contenido + ", fragmentoCodigo=" + fragmentoCodigo + ", tipoPregunta=" + tipoPregunta + ", opcionesRespuesta=" + opcionesRespuesta + '}';
+        return "PreguntaEntity{" + "id=" + id + ", textoInicio=" + textoInicio + ", textoFin=" + textoFin + ", fragmentoCodigo=" + fragmentoCodigo + ", tipoPregunta=" + tipoPregunta + ", opcionesRespuesta=" + opcionesRespuesta + ", temasCertificacion=" + temasCertificacion + '}';
     }
 
 }

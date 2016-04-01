@@ -23,7 +23,7 @@ public class PreguntaEntityTest {
         /* RESPUESTA DE SELECCIÓN ÚNICA */
         preguntaSeleccionUnica = new PreguntaEntity();
         preguntaSeleccionUnica.setTipoPregunta(TipoPregunta.SELECCION_UNICA);
-        preguntaSeleccionUnica.setContenido("contenido de prueba");
+        preguntaSeleccionUnica.setTextoInicio("contenido de prueba");
         preguntaSeleccionUnica.setFragmentoCodigo("fragmento de código de prueba");
 
         List<OpcionRespuestaEntity> respuestas = new ArrayList<>();
@@ -58,7 +58,7 @@ public class PreguntaEntityTest {
         /* RESPUESTA DE SELECCIÓN MÚLTIPLE */
         preguntaSeleccionMultiple = new PreguntaEntity();
         preguntaSeleccionMultiple.setTipoPregunta(TipoPregunta.SELECCION_MULTIPLE);
-        preguntaSeleccionMultiple.setContenido("contenido de prueba");
+        preguntaSeleccionMultiple.setTextoInicio("contenido de prueba");
         preguntaSeleccionMultiple.setFragmentoCodigo("fragmento de código de prueba");
 
         respuestas = new ArrayList<>();

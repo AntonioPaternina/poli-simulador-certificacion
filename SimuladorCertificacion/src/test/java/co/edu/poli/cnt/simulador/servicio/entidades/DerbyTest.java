@@ -31,7 +31,7 @@ public class DerbyTest {
 
     private void crearEntidades(final EntityManager em) {
         PreguntaEntity pregunta = new PreguntaEntity();
-        pregunta.setContenido("Contenido de prueba");
+        pregunta.setTextoInicio("Contenido de prueba");
         pregunta.setFragmentoCodigo("Fragmento de código de prueba");
         pregunta.setTipoPregunta(TipoPregunta.SELECCION_UNICA);
 
@@ -56,7 +56,7 @@ public class DerbyTest {
         em.persist(pregunta);
 
         pregunta = new PreguntaEntity();
-        pregunta.setContenido("Contenido de prueba");
+        pregunta.setTextoInicio("Contenido de prueba");
         pregunta.setFragmentoCodigo("Fragmento de código de prueba");
         pregunta.setTipoPregunta(TipoPregunta.SELECCION_MULTIPLE);
 
