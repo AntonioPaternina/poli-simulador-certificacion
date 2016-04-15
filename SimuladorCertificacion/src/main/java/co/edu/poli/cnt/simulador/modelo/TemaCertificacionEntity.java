@@ -1,4 +1,4 @@
-package co.edu.poli.cnt.simulador.servicio.entidades;
+package co.edu.poli.cnt.simulador.modelo;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,5 +1,6 @@
 package co.edu.poli.cnt.simulador.servicio.entidades;
 
+import co.edu.poli.cnt.simulador.modelo.OpcionRespuestaEntity;
 import org.junit.Assert;
 import org.junit.Test;
 

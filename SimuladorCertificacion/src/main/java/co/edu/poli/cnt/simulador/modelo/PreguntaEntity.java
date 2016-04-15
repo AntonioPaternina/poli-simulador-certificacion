@@ -1,4 +1,4 @@
-package co.edu.poli.cnt.simulador.servicio.entidades;
+package co.edu.poli.cnt.simulador.modelo;
 
 import co.edu.poli.cnt.simulador.servicio.excepciones.OpcionRespuestaNoExisteException;
 import co.edu.poli.cnt.simulador.servicio.excepciones.PreguntaInvalidaException;

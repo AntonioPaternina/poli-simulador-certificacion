@@ -1,5 +1,8 @@
 package co.edu.poli.cnt.simulador.servicio.entidades;
 
+import co.edu.poli.cnt.simulador.modelo.PreguntaEntity;
+import co.edu.poli.cnt.simulador.modelo.OpcionRespuestaEntity;
+import co.edu.poli.cnt.simulador.modelo.TipoPregunta;
 import co.edu.poli.cnt.simulador.servicio.excepciones.OpcionRespuestaNoExisteException;
 import co.edu.poli.cnt.simulador.servicio.excepciones.PreguntaInvalidaException;
 import java.util.ArrayList;

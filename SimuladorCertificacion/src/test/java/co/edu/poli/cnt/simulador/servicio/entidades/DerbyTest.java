@@ -1,5 +1,8 @@
 package co.edu.poli.cnt.simulador.servicio.entidades;
 
+import co.edu.poli.cnt.simulador.modelo.PreguntaEntity;
+import co.edu.poli.cnt.simulador.modelo.OpcionRespuestaEntity;
+import co.edu.poli.cnt.simulador.modelo.TipoPregunta;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
