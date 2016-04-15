@@ -10,7 +10,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 
 import org.junit.Test;
 
@@ -23,9 +25,25 @@ public class DerbyTest {
 
     private final Logger logger = Logger.getLogger(DerbyTest.class);
 
+    private static EntityManager em;
+
+    @BeforeClass
+    public static void crearEntityManager() {
+        em = initHibernate();
+    }
+
+    @AfterClass
+    public static void limpiarBaseDeDatos() {
+        em.getTransaction().begin();
+        em.createQuery("delete from OpcionRespuestaEntity").executeUpdate();
+        em.createQuery("delete from PreguntaEntity").executeUpdate();
+        em.createQuery("delete from TemaCertificacionEntity").executeUpdate();
+        em.getTransaction().commit();
+    }
+
     @Test
     public void probarBaseDeDatos() {
-        final EntityManager em = initHibernate();
+        em = initHibernate();
         em.getTransaction().begin();
         crearEntidades(em);
         listarEntidades(em);
@@ -105,7 +123,7 @@ public class DerbyTest {
         });
     }
 
-    public EntityManager initHibernate() {
+    public static EntityManager initHibernate() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("co.edu.poli.cnt_SimuladorCertificacion");
         return emf.createEntityManager();
     }

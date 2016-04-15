@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -29,10 +30,13 @@ public class PreguntaEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "clob")
     @Lob
     private String textoInicio;
+    @Column(columnDefinition = "clob")
     @Lob
     private String textoFin;
+    @Column(columnDefinition = "clob")
     @Lob
     private String fragmentoCodigo;
     @Enumerated(EnumType.STRING)

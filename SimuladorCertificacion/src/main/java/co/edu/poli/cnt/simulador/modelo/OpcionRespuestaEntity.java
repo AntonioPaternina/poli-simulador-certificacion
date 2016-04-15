@@ -2,6 +2,7 @@ package co.edu.poli.cnt.simulador.modelo;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class OpcionRespuestaEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(columnDefinition = "clob")
     @Lob
     private String contenido;
     private boolean opcionCorrecta;

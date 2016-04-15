@@ -1,4 +1,4 @@
-package co.edu.poli.cnt.simulador.controlador;
+package co.edu.poli.cnt.simulador.vista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

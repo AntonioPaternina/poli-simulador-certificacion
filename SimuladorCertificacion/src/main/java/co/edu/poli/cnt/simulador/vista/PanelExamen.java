@@ -45,7 +45,7 @@ public class PanelExamen extends JPanel {
     private void initComponents() {
 
         panelEncabezado = new javax.swing.JPanel();
-        temporizador = new co.edu.poli.cnt.simulador.controlador.Temporizador();
+        temporizador = new co.edu.poli.cnt.simulador.vista.Temporizador();
         panelNavegadorDePreguntas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
@@ -54,7 +54,7 @@ public class PanelExamen extends JPanel {
         botonAnterior = new javax.swing.JButton();
         checkMarcar = new javax.swing.JCheckBox();
         panelPregunta = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        scrollAreaPregunta = new javax.swing.JScrollPane();
 
         setPreferredSize(new java.awt.Dimension(1280, 800));
 
@@ -150,14 +150,14 @@ public class PanelExamen extends JPanel {
             panelPreguntaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPreguntaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(scrollAreaPregunta)
                 .addContainerGap())
         );
         panelPreguntaLayout.setVerticalGroup(
             panelPreguntaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPreguntaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(scrollAreaPregunta)
                 .addContainerGap())
         );
 
@@ -204,12 +204,12 @@ public class PanelExamen extends JPanel {
     private javax.swing.JCheckBox checkMarcar;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panelControles;
     private javax.swing.JPanel panelEncabezado;
     private javax.swing.JPanel panelNavegadorDePreguntas;
     private javax.swing.JPanel panelPregunta;
-    private co.edu.poli.cnt.simulador.controlador.Temporizador temporizador;
+    private javax.swing.JScrollPane scrollAreaPregunta;
+    private co.edu.poli.cnt.simulador.vista.Temporizador temporizador;
     // End of variables declaration//GEN-END:variables
 
 }
