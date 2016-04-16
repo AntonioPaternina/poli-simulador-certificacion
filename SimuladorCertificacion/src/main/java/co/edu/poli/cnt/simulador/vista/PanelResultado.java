@@ -1,16 +1,76 @@
 package co.edu.poli.cnt.simulador.vista;
 
+import co.edu.poli.cnt.simulador.modelo.PreguntaEntity;
+import co.edu.poli.cnt.simulador.modelo.TemaCertificacionEntity;
+import co.edu.poli.cnt.simulador.servicio.excepciones.PreguntaInvalidaException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JLabel;
+import org.jboss.logging.Logger;
+
 /**
  *
  * @author Antonio Paternina <acpaternina@poli.edu.co>
  */
 public class PanelResultado extends javax.swing.JPanel {
 
+    private static final Logger LOGGER = Logger.getLogger(PanelResultado.class.getName());
+
+    private List<PreguntaEntity> examen;
+
     /**
      * Creates new form PanelResultado
      */
     public PanelResultado() {
         initComponents();
+    }
+
+    public List<PreguntaEntity> getExamen() {
+        return examen;
+    }
+
+    public void setExamen(List<PreguntaEntity> examen) {
+        this.examen = examen;
+    }
+
+    public void calificarExamen() {
+        if (examen != null && !examen.isEmpty()) {
+            int totalRespuestas = examen.size();
+            int respuestasCorrectas = 0;
+            int respuestasIncorrectas = 0;
+            Set<TemaCertificacionEntity> temasFallados = new HashSet<>();
+            for (PreguntaEntity pregunta : examen) {
+                try {
+                    if (pregunta.calificarPregunta()) {
+                        respuestasCorrectas++;
+                    } else {
+                        respuestasIncorrectas++;
+                        temasFallados.addAll(pregunta.getTemasCertificacion());
+                    }
+                } catch (PreguntaInvalidaException e) {
+                    respuestasIncorrectas++;
+                    temasFallados.addAll(pregunta.getTemasCertificacion());
+                    LOGGER.error("Error durante la calificación del examen");
+                }
+            }
+
+            // mostrar resultado
+            puntaje.setText(respuestasCorrectas + " / " + totalRespuestas);
+            
+            // mostrar retroalimentacion
+            if (respuestasIncorrectas == 0) {
+                labelRetroalimentacion.setText("Felicitaciones, obtuvo un puntaje perfecto!");
+            } else {
+                labelRetroalimentacion.setText("Estos son los temas que debe repasar:");
+                
+                temasFallados.stream().map((tema) -> new JLabel(tema.getNombre())).forEach((temaFallado) -> {
+                    panelTemasFallados.add(temaFallado);
+                });
+                
+            }
+        }
     }
 
     /**
@@ -22,17 +82,63 @@ public class PanelResultado extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labelTituloPanelResultado = new javax.swing.JLabel();
+        labelPuntaje = new javax.swing.JLabel();
+        puntaje = new javax.swing.JLabel();
+        labelRetroalimentacion = new javax.swing.JLabel();
+        panelTemasFallados = new javax.swing.JPanel();
 
-        setLayout(new java.awt.GridBagLayout());
+        labelTituloPanelResultado.setFont(new java.awt.Font("Lucida Grande", 1, 36)); // NOI18N
+        labelTituloPanelResultado.setText("La prueba ha terminado!");
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 36)); // NOI18N
-        jLabel1.setText("La prueba ha terminado!");
-        add(jLabel1, new java.awt.GridBagConstraints());
+        labelPuntaje.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        labelPuntaje.setText("Tu puntaje fue:");
+
+        puntaje.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+
+        labelRetroalimentacion.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+
+        panelTemasFallados.setLayout(new javax.swing.BoxLayout(panelTemasFallados, javax.swing.BoxLayout.PAGE_AXIS));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelTituloPanelResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelPuntaje)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(puntaje))
+                    .addComponent(labelRetroalimentacion)
+                    .addComponent(panelTemasFallados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelTituloPanelResultado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelPuntaje)
+                    .addComponent(puntaje))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelRetroalimentacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelTemasFallados, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labelPuntaje;
+    private javax.swing.JLabel labelRetroalimentacion;
+    private javax.swing.JLabel labelTituloPanelResultado;
+    private javax.swing.JPanel panelTemasFallados;
+    private javax.swing.JLabel puntaje;
     // End of variables declaration//GEN-END:variables
 }

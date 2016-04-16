@@ -67,14 +67,14 @@ public class PanelExamen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // mostrar panel de resultado
                 VistaPrincipal vistaPrincipal = (VistaPrincipal) SwingUtilities.getWindowAncestor(estePanel);
-                vistaPrincipal.mostrarPanelResultado();
+                vistaPrincipal.mostrarPanelResultado(preguntas);
             }
         });
     }
 
     public void mostrarPreguntaActual() {
         limpiarTodo();
-        
+
         StringBuilder textoPregunta = new StringBuilder();
         PreguntaEntity preguntaActual = getPreguntaActual();
 
@@ -137,7 +137,7 @@ public class PanelExamen extends JPanel {
                         }
                     });
                     panelRespuestas.add(radioButton);
-                }                
+                }
                 break;
             case SELECCION_MULTIPLE:
                 break;
@@ -157,7 +157,7 @@ public class PanelExamen extends JPanel {
         panelRespuestas.revalidate();
         panelRespuestas.repaint();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -176,6 +176,7 @@ public class PanelExamen extends JPanel {
         botonSiguiente = new javax.swing.JButton();
         botonAnterior = new javax.swing.JButton();
         checkMarcar = new javax.swing.JCheckBox();
+        botonTerminar = new javax.swing.JButton();
         panelPregunta = new javax.swing.JPanel();
         scrollAreaPregunta = new javax.swing.JScrollPane();
         textAreaPregunta = new javax.swing.JTextArea();
@@ -259,12 +260,21 @@ public class PanelExamen extends JPanel {
             }
         });
 
+        botonTerminar.setText("Terminar");
+        botonTerminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonTerminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelControlesLayout = new javax.swing.GroupLayout(panelControles);
         panelControles.setLayout(panelControlesLayout);
         panelControlesLayout.setHorizontalGroup(
             panelControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelControlesLayout.createSequentialGroup()
-                .addContainerGap(811, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(botonTerminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 705, Short.MAX_VALUE)
                 .addComponent(checkMarcar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonAnterior)
@@ -281,7 +291,8 @@ public class PanelExamen extends JPanel {
                 .addGroup(panelControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonSiguiente)
                     .addComponent(botonAnterior)
-                    .addComponent(checkMarcar))
+                    .addComponent(checkMarcar)
+                    .addComponent(botonTerminar))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -372,10 +383,17 @@ public class PanelExamen extends JPanel {
         mostrarPreguntaActual();
     }//GEN-LAST:event_botonSiguienteActionPerformed
 
+    private void botonTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTerminarActionPerformed
+        this.temporizador.detener();
+        VistaPrincipal vistaPrincipal = (VistaPrincipal) SwingUtilities.getWindowAncestor(this);
+        vistaPrincipal.mostrarPanelResultado(preguntas);
+    }//GEN-LAST:event_botonTerminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAnterior;
     private javax.swing.JButton botonSiguiente;
+    private javax.swing.JButton botonTerminar;
     private javax.swing.JCheckBox checkMarcar;
     private javax.swing.JList<PreguntaEntity> listaPreguntas;
     private javax.swing.JPanel panelControles;

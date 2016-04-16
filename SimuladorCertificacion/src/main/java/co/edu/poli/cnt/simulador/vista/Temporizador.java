@@ -35,6 +35,10 @@ public class Temporizador extends JLabel implements ActionListener {
         temporizador.start();
         calcularTiempo();
     }
+    
+    public void detener() {
+        temporizador.stop();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -1,8 +1,8 @@
 package co.edu.poli.cnt.simulador.vista;
 
-import co.edu.poli.cnt.simulador.repositorio.PreguntaRepositorio;
+import co.edu.poli.cnt.simulador.modelo.PreguntaEntity;
 import co.edu.poli.cnt.simulador.repositorio.PreguntaRepositorioImpl;
-import java.awt.GridBagConstraints;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -115,11 +115,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     /**
      * Muestra el panel de resultado en la aplicación
+     *
+     * @param examen
      */
-    public void mostrarPanelResultado() {
+    public void mostrarPanelResultado(List<PreguntaEntity> examen) {
         eliminarPanel(panelExamen);
         if (panelResultado == null) {
             panelResultado = new PanelResultado();
+            panelResultado.setExamen(examen);
+            panelResultado.calificarExamen();
         }
         mostrarPanel(panelResultado);
     }

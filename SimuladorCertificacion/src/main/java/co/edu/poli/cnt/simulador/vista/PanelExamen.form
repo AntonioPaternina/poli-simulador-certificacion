@@ -164,7 +164,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="811" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="botonTerminar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="705" max="32767" attributes="0"/>
                   <Component id="checkMarcar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="botonAnterior" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -181,6 +183,7 @@
                       <Component id="botonSiguiente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="botonAnterior" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="checkMarcar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonTerminar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
               </Group>
@@ -210,6 +213,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkMarcarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="botonTerminar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Terminar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonTerminarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
