@@ -16,7 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.Transient;
 
 /**
  * Entidad Pregunta
@@ -42,11 +42,12 @@ public class PreguntaEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoPregunta tipoPregunta;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pregunta")
-    @NotEmpty
     private List<OpcionRespuestaEntity> opcionesRespuesta;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<TemaCertificacionEntity> temasCertificacion;
     private Integer orden;
+    @Transient
+    private boolean marcadoRevision;
 
     /**
      * Califica la pregunta al determinar si la(s) respuesta(s) escogida(s) es
@@ -187,6 +188,14 @@ public class PreguntaEntity implements Serializable {
 
     public void setOrden(Integer orden) {
         this.orden = orden;
+    }
+
+    public boolean isMarcadoRevision() {
+        return marcadoRevision;
+    }
+
+    public void setMarcadoRevision(boolean marcadoRevision) {
+        this.marcadoRevision = marcadoRevision;
     }
 
     @Override

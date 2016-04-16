@@ -24,6 +24,7 @@ public class PanelBienvenida extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         tituloPrincipalLabel = new javax.swing.JLabel();
         botonComenzarPanel = new javax.swing.JPanel();
         glueHorizontalAntes = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
@@ -31,12 +32,14 @@ public class PanelBienvenida extends javax.swing.JPanel {
         GlueHorizontalDespues = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
 
         setPreferredSize(new java.awt.Dimension(1280, 800));
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
+        setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
         tituloPrincipalLabel.setFont(new java.awt.Font("Lucida Grande", 1, 36)); // NOI18N
         tituloPrincipalLabel.setText("<html><p style=\"center\">Simulador Examen de Certificación</p></html>");
-        tituloPrincipalLabel.setMinimumSize(new java.awt.Dimension(600, 43));
-        add(tituloPrincipalLabel);
+        tituloPrincipalLabel.setMinimumSize(new java.awt.Dimension(1000, 100));
+        jPanel1.add(tituloPrincipalLabel);
 
         botonComenzarPanel.setLayout(new javax.swing.BoxLayout(botonComenzarPanel, javax.swing.BoxLayout.LINE_AXIS));
         botonComenzarPanel.add(glueHorizontalAntes);
@@ -50,7 +53,9 @@ public class PanelBienvenida extends javax.swing.JPanel {
         botonComenzarPanel.add(botonComenzar);
         botonComenzarPanel.add(GlueHorizontalDespues);
 
-        add(botonComenzarPanel);
+        jPanel1.add(botonComenzarPanel);
+
+        add(jPanel1, new java.awt.GridBagConstraints());
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonComenzarActionPerformed
@@ -65,6 +70,7 @@ public class PanelBienvenida extends javax.swing.JPanel {
     private javax.swing.JButton botonComenzar;
     private javax.swing.JPanel botonComenzarPanel;
     private javax.swing.Box.Filler glueHorizontalAntes;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel tituloPrincipalLabel;
     // End of variables declaration//GEN-END:variables
 }

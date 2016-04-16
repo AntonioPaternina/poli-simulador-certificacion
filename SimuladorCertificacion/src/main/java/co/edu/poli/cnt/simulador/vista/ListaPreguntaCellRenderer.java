@@ -3,6 +3,7 @@ package co.edu.poli.cnt.simulador.vista;
 import co.edu.poli.cnt.simulador.modelo.PreguntaEntity;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -20,14 +21,18 @@ public class ListaPreguntaCellRenderer extends JButton implements ListCellRender
         setText(String.valueOf(++index));
         setEnabled(list.isEnabled());
         setFont(list.getFont());
-        setForeground(Color.BLACK);
-        setBackground(Color.WHITE);
-        setBorder(new EmptyBorder(5, 5, 5, 5));
-        setBorderPainted(false);
-        setFocusPainted(false);
-        setContentAreaFilled(false);
+        setBorder(null);
+        
+        if (isSelected) {
+            setBackground(Color.LIGHT_GRAY);
+            setForeground(Color.RED);
+        } else {
+            setBackground(Color.WHITE);
+            setForeground(Color.BLUE);
+        }
 
         return this;
+
     }
 
 }

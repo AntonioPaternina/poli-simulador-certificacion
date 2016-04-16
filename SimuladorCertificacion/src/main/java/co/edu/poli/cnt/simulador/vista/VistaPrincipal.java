@@ -39,7 +39,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simulador OCPJP8");
         setPreferredSize(new java.awt.Dimension(1280, 800));
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -131,7 +131,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
      */
     private void mostrarPanel(JPanel panel) {
         JFrame frame = this;
-        frame.add(panel, calcularConstraints());
+        frame.add(panel);
         frame.revalidate();
         frame.repaint();
     }
@@ -144,17 +144,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void eliminarPanel(JPanel panel) {
         JFrame frame = this;
         frame.remove(panel);
-    }
-
-    private GridBagConstraints calcularConstraints() {
-        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 141;
-        gridBagConstraints.ipady = 114;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(16, 6, 0, 6);
-        return gridBagConstraints;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

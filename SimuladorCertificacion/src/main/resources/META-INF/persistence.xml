@@ -7,19 +7,24 @@
         <class>co.edu.poli.cnt.simulador.modelo.PreguntaEntity</class>
         <class>co.edu.poli.cnt.simulador.modelo.TemaCertificacionEntity</class>
         <properties>
-            <!-- DEV -->
+            <!-- DEV BASE DE DATOS EXTERNA -->
             <!--
             <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/simulador;create=true"/>
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/init_script.sql" />
             -->
-            <!-- PROD -->            
+            <!-- DEV BASE DE DATOS EMBEDDED -->  
+            <!--          
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby:simulador;create=true"/>
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>                                    
+            -->
+            <!-- PROD BASE DE DATOS EMBEDDED-->                        
             <property name="javax.persistence.jdbc.url" value="jdbc:derby:simulador;create=true"/>
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>            
             <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/init_script.sql" />
-            <property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor" />
+            <property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor" />            
             <!-- Otras -->
             <property name="javax.persistence.jdbc.user" value="app"/>
             <property name="javax.persistence.jdbc.password" value="app"/>

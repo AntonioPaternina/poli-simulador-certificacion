@@ -1,16 +1,23 @@
 package co.edu.poli.cnt.simulador.vista;
 
+import co.edu.poli.cnt.simulador.modelo.OpcionRespuestaEntity;
 import co.edu.poli.cnt.simulador.modelo.PreguntaEntity;
+import co.edu.poli.cnt.simulador.modelo.TipoPregunta;
 import co.edu.poli.cnt.simulador.repositorio.PreguntaRepositorio;
 import co.edu.poli.cnt.simulador.repositorio.PreguntaRepositorioImpl;
+import co.edu.poli.cnt.simulador.servicio.excepciones.OpcionRespuestaNoExisteException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
 import javax.swing.AbstractListModel;
+import javax.swing.ButtonGroup;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -18,10 +25,12 @@ import org.apache.log4j.Logger;
  * @author Antonio Paternina <acpaternina@poli.edu.co>
  */
 public class PanelExamen extends JPanel {
-    
+
     private static final Logger LOGGER = Logger.getLogger(PanelExamen.class.getName());
 
     private PreguntaRepositorio preguntaRepositorio;
+    private final List<PreguntaEntity> preguntas;
+    private int indicePreguntaActual;
 
     /**
      * Creates new form PanelExamen
@@ -29,10 +38,10 @@ public class PanelExamen extends JPanel {
     public PanelExamen() {
         JPanel estePanel = this;
         initComponents();
-        preguntaRepositorio = PreguntaRepositorioImpl.getInstancia();        
+        preguntaRepositorio = PreguntaRepositorioImpl.getInstancia();
 
         // cargar las preguntas del examen
-        final List<PreguntaEntity> preguntas = preguntaRepositorio.getAllPreguntaEntity();
+        preguntas = preguntaRepositorio.getAllPreguntaEntity();
         LOGGER.info(preguntas);
         listaPreguntas.setModel(new AbstractListModel<PreguntaEntity>() {
             @Override
@@ -49,6 +58,9 @@ public class PanelExamen extends JPanel {
         listaPreguntas.setLayoutOrientation(JList.HORIZONTAL_WRAP);
         listaPreguntas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+        // mostrar pregunta actual
+        mostrarPreguntaActual();
+
         // iniciar el temporizador
         this.temporizador.inicializar(60 * 120 - 1, new ActionListener() {
             @Override
@@ -60,6 +72,92 @@ public class PanelExamen extends JPanel {
         });
     }
 
+    public void mostrarPreguntaActual() {
+        limpiarTodo();
+        
+        StringBuilder textoPregunta = new StringBuilder();
+        PreguntaEntity preguntaActual = getPreguntaActual();
+
+        // mostrar encabezado pregunta
+        if (StringUtils.isNotBlank(preguntaActual.getTextoInicio())) {
+            textoPregunta.append(preguntaActual.getTextoInicio());
+            textoPregunta.append("\n\n");
+        }
+
+        // mostrar código pregunta
+        if (StringUtils.isNotBlank(preguntaActual.getFragmentoCodigo())) {
+            textoPregunta.append(preguntaActual.getFragmentoCodigo());
+            textoPregunta.append("\n\n");
+        }
+
+        // mostrar encabezado respuestas
+        if (StringUtils.isNotBlank(preguntaActual.getTextoFin())) {
+            textoPregunta.append(preguntaActual.getTextoFin());
+        }
+
+        // mostrar pregunta
+        textAreaPregunta.setText(textoPregunta.toString());
+
+        // seleccionar la pregunta actual en el panel de navegación de preguntas
+        listaPreguntas.setSelectedIndex(indicePreguntaActual);
+
+        // marcar el check de revisión en caso de aplicar
+        checkMarcar.setSelected(preguntaActual.isMarcadoRevision());
+
+        // renderizar respuestas
+        mostrarRespuestas();
+    }
+
+    private void mostrarRespuestas() {
+        // limpiar respuestas anteriores
+        panelRespuestas.removeAll();
+        PreguntaEntity preguntaActual = getPreguntaActual();
+        // determinar si es seleccion unica o multiple
+        TipoPregunta tipoPregunta = preguntaActual.getTipoPregunta();
+        switch (tipoPregunta) {
+            case SELECCION_UNICA:
+                ButtonGroup grupoBotones = new ButtonGroup();
+                for (int i = 0; i < preguntaActual.getOpcionesRespuesta().size(); i++) {
+                    OpcionRespuestaEntity respuesta = preguntaActual.getOpcionesRespuesta().get(i);
+                    JRadioButton radioButton = new JRadioButton((i + 1) + ". " + respuesta.getContenido());
+                    radioButton.setActionCommand(String.valueOf(respuesta.getId()));
+                    grupoBotones.add(radioButton);
+                    if (respuesta.isElegida()) {
+                        radioButton.setSelected(true);
+                    }
+                    radioButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                int idRespuesta = Integer.parseInt(e.getActionCommand());
+                                preguntaActual.marcarOpcionRespuesta(idRespuesta);
+                            } catch (OpcionRespuestaNoExisteException ex) {
+                                java.util.logging.Logger.getLogger(PanelExamen.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    });
+                    panelRespuestas.add(radioButton);
+                }                
+                break;
+            case SELECCION_MULTIPLE:
+                break;
+            default:
+                // no hacer nada
+                break;
+        }
+    }
+
+    private PreguntaEntity getPreguntaActual() {
+        return preguntas.get(indicePreguntaActual);
+    }
+
+    private void limpiarTodo() {
+        textAreaPregunta.setText("");
+        panelRespuestas.removeAll();
+        panelRespuestas.revalidate();
+        panelRespuestas.repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,6 +178,9 @@ public class PanelExamen extends JPanel {
         checkMarcar = new javax.swing.JCheckBox();
         panelPregunta = new javax.swing.JPanel();
         scrollAreaPregunta = new javax.swing.JScrollPane();
+        textAreaPregunta = new javax.swing.JTextArea();
+        scrollAreaRespuestas = new javax.swing.JScrollPane();
+        panelRespuestas = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(1280, 800));
 
@@ -103,19 +204,17 @@ public class PanelExamen extends JPanel {
         );
 
         panelNavegadorDePreguntas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelNavegadorDePreguntas.setPreferredSize(new java.awt.Dimension(150, 340));
 
         listaPreguntas.setModel(new javax.swing.AbstractListModel<PreguntaEntity>() {
             public int getSize() { return 0; }
             public PreguntaEntity getElementAt(int i) { return null; }
         });
+        listaPreguntas.setFixedCellHeight(40);
+        listaPreguntas.setFixedCellWidth(40);
         listaPreguntas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaPreguntasMouseClicked(evt);
-            }
-        });
-        listaPreguntas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listaPreguntasValueChanged(evt);
             }
         });
         scrollPaneListaPreguntas.setViewportView(listaPreguntas);
@@ -126,24 +225,34 @@ public class PanelExamen extends JPanel {
             panelNavegadorDePreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNavegadorDePreguntasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollPaneListaPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addComponent(scrollPaneListaPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelNavegadorDePreguntasLayout.setVerticalGroup(
             panelNavegadorDePreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNavegadorDePreguntasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollPaneListaPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                .addComponent(scrollPaneListaPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         panelControles.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        botonSiguiente.setText("next");
+        botonSiguiente.setText("siguiente");
+        botonSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSiguienteActionPerformed(evt);
+            }
+        });
 
-        botonAnterior.setText("previous");
+        botonAnterior.setText("anterior");
+        botonAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAnteriorActionPerformed(evt);
+            }
+        });
 
-        checkMarcar.setText("mark");
+        checkMarcar.setText("marcar");
         checkMarcar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkMarcarActionPerformed(evt);
@@ -155,7 +264,7 @@ public class PanelExamen extends JPanel {
         panelControlesLayout.setHorizontalGroup(
             panelControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelControlesLayout.createSequentialGroup()
-                .addContainerGap(259, Short.MAX_VALUE)
+                .addContainerGap(811, Short.MAX_VALUE)
                 .addComponent(checkMarcar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonAnterior)
@@ -178,20 +287,31 @@ public class PanelExamen extends JPanel {
 
         panelPregunta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        textAreaPregunta.setEditable(false);
+        textAreaPregunta.setColumns(20);
+        textAreaPregunta.setRows(5);
+        scrollAreaPregunta.setViewportView(textAreaPregunta);
+
+        panelRespuestas.setLayout(new javax.swing.BoxLayout(panelRespuestas, javax.swing.BoxLayout.PAGE_AXIS));
+        scrollAreaRespuestas.setViewportView(panelRespuestas);
+
         javax.swing.GroupLayout panelPreguntaLayout = new javax.swing.GroupLayout(panelPregunta);
         panelPregunta.setLayout(panelPreguntaLayout);
         panelPreguntaLayout.setHorizontalGroup(
             panelPreguntaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPreguntaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollAreaPregunta)
+                .addGroup(panelPreguntaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollAreaPregunta)
+                    .addComponent(scrollAreaRespuestas))
                 .addContainerGap())
         );
         panelPreguntaLayout.setVerticalGroup(
             panelPreguntaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPreguntaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrollAreaPregunta)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPreguntaLayout.createSequentialGroup()
+                .addComponent(scrollAreaPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollAreaRespuestas)
                 .addContainerGap())
         );
 
@@ -218,7 +338,7 @@ public class PanelExamen extends JPanel {
                 .addComponent(panelEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelNavegadorDePreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelNavegadorDePreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelPregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -228,21 +348,29 @@ public class PanelExamen extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void checkMarcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkMarcarActionPerformed
-        // TODO add your handling code here:
+        PreguntaEntity preguntaActual = preguntas.get(indicePreguntaActual);
+        preguntaActual.setMarcadoRevision(true);
     }//GEN-LAST:event_checkMarcarActionPerformed
-
-    private void listaPreguntasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaPreguntasValueChanged
-        if(!evt.getValueIsAdjusting()) {
-            JList<PreguntaEntity> lista = (JList<PreguntaEntity>) evt.getSource();
-            lista.repaint();
-        }
-    }//GEN-LAST:event_listaPreguntasValueChanged
 
     private void listaPreguntasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPreguntasMouseClicked
         JList list = (JList<PreguntaEntity>) evt.getComponent();
-        PreguntaEntity pregunta = (PreguntaEntity) list.getSelectedValue();
-        System.out.println(pregunta);
+        indicePreguntaActual = list.getSelectedIndex();
+        mostrarPreguntaActual();
     }//GEN-LAST:event_listaPreguntasMouseClicked
+
+    private void botonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnteriorActionPerformed
+        if (indicePreguntaActual > 0) {
+            indicePreguntaActual--;
+        }
+        mostrarPreguntaActual();
+    }//GEN-LAST:event_botonAnteriorActionPerformed
+
+    private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
+        if (indicePreguntaActual < preguntas.size() - 1) {
+            indicePreguntaActual++;
+        }
+        mostrarPreguntaActual();
+    }//GEN-LAST:event_botonSiguienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -254,9 +382,12 @@ public class PanelExamen extends JPanel {
     private javax.swing.JPanel panelEncabezado;
     private javax.swing.JPanel panelNavegadorDePreguntas;
     private javax.swing.JPanel panelPregunta;
+    private javax.swing.JPanel panelRespuestas;
     private javax.swing.JScrollPane scrollAreaPregunta;
+    private javax.swing.JScrollPane scrollAreaRespuestas;
     private javax.swing.JScrollPane scrollPaneListaPreguntas;
     private co.edu.poli.cnt.simulador.vista.Temporizador temporizador;
+    private javax.swing.JTextArea textAreaPregunta;
     // End of variables declaration//GEN-END:variables
 
 }
