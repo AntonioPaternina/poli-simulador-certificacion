@@ -1,16 +1,27 @@
 package co.edu.poli.cnt.simulador.vista;
 
+import co.edu.poli.cnt.simulador.modelo.PreguntaEntity;
+import co.edu.poli.cnt.simulador.repositorio.PreguntaRepositorio;
+import co.edu.poli.cnt.simulador.repositorio.PreguntaRepositorioImpl;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
+import java.util.List;
+import javax.swing.AbstractListModel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Antonio Paternina <acpaternina@poli.edu.co>
  */
 public class PanelExamen extends JPanel {
+    
+    private static final Logger LOGGER = Logger.getLogger(PanelExamen.class.getName());
+
+    private PreguntaRepositorio preguntaRepositorio;
 
     /**
      * Creates new form PanelExamen
@@ -18,19 +29,33 @@ public class PanelExamen extends JPanel {
     public PanelExamen() {
         JPanel estePanel = this;
         initComponents();
-        this.temporizador.inicializar(10, new ActionListener() {
+        preguntaRepositorio = PreguntaRepositorioImpl.getInstancia();        
+
+        // cargar las preguntas del examen
+        final List<PreguntaEntity> preguntas = preguntaRepositorio.getAllPreguntaEntity();
+        LOGGER.info(preguntas);
+        listaPreguntas.setModel(new AbstractListModel<PreguntaEntity>() {
+            @Override
+            public int getSize() {
+                return preguntas.size();
+            }
+
+            @Override
+            public PreguntaEntity getElementAt(int index) {
+                return preguntas.get(index);
+            }
+        });
+        listaPreguntas.setCellRenderer(new ListaPreguntaCellRenderer());
+        listaPreguntas.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        listaPreguntas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        // iniciar el temporizador
+        this.temporizador.inicializar(60 * 120 - 1, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // obtener la vista principal
-                JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(estePanel);
-                // eliminar el panel de bienvenida ...
-                topFrame.remove(estePanel);
-                // reemplazarlo por el panel del examen
-                PanelResultado panelResultado = new PanelResultado();
-                topFrame.add(panelResultado);
-                // volver a pintar la vista principal para que se tomen los cambios        
-                topFrame.revalidate();
-                topFrame.repaint();
+                // mostrar panel de resultado
+                VistaPrincipal vistaPrincipal = (VistaPrincipal) SwingUtilities.getWindowAncestor(estePanel);
+                vistaPrincipal.mostrarPanelResultado();
             }
         });
     }
@@ -47,8 +72,8 @@ public class PanelExamen extends JPanel {
         panelEncabezado = new javax.swing.JPanel();
         temporizador = new co.edu.poli.cnt.simulador.vista.Temporizador();
         panelNavegadorDePreguntas = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        scrollPaneListaPreguntas = new javax.swing.JScrollPane();
+        listaPreguntas = new javax.swing.JList<>();
         panelControles = new javax.swing.JPanel();
         botonSiguiente = new javax.swing.JButton();
         botonAnterior = new javax.swing.JButton();
@@ -79,12 +104,21 @@ public class PanelExamen extends JPanel {
 
         panelNavegadorDePreguntas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        listaPreguntas.setModel(new javax.swing.AbstractListModel<PreguntaEntity>() {
+            public int getSize() { return 0; }
+            public PreguntaEntity getElementAt(int i) { return null; }
         });
-        jScrollPane1.setViewportView(jList1);
+        listaPreguntas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaPreguntasMouseClicked(evt);
+            }
+        });
+        listaPreguntas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaPreguntasValueChanged(evt);
+            }
+        });
+        scrollPaneListaPreguntas.setViewportView(listaPreguntas);
 
         javax.swing.GroupLayout panelNavegadorDePreguntasLayout = new javax.swing.GroupLayout(panelNavegadorDePreguntas);
         panelNavegadorDePreguntas.setLayout(panelNavegadorDePreguntasLayout);
@@ -92,14 +126,14 @@ public class PanelExamen extends JPanel {
             panelNavegadorDePreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNavegadorDePreguntasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addComponent(scrollPaneListaPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelNavegadorDePreguntasLayout.setVerticalGroup(
             panelNavegadorDePreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNavegadorDePreguntasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                .addComponent(scrollPaneListaPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -197,18 +231,31 @@ public class PanelExamen extends JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_checkMarcarActionPerformed
 
+    private void listaPreguntasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaPreguntasValueChanged
+        if(!evt.getValueIsAdjusting()) {
+            JList<PreguntaEntity> lista = (JList<PreguntaEntity>) evt.getSource();
+            lista.repaint();
+        }
+    }//GEN-LAST:event_listaPreguntasValueChanged
+
+    private void listaPreguntasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPreguntasMouseClicked
+        JList list = (JList<PreguntaEntity>) evt.getComponent();
+        PreguntaEntity pregunta = (PreguntaEntity) list.getSelectedValue();
+        System.out.println(pregunta);
+    }//GEN-LAST:event_listaPreguntasMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAnterior;
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JCheckBox checkMarcar;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<PreguntaEntity> listaPreguntas;
     private javax.swing.JPanel panelControles;
     private javax.swing.JPanel panelEncabezado;
     private javax.swing.JPanel panelNavegadorDePreguntas;
     private javax.swing.JPanel panelPregunta;
     private javax.swing.JScrollPane scrollAreaPregunta;
+    private javax.swing.JScrollPane scrollPaneListaPreguntas;
     private co.edu.poli.cnt.simulador.vista.Temporizador temporizador;
     // End of variables declaration//GEN-END:variables
 

@@ -46,6 +46,7 @@ public class PreguntaEntity implements Serializable {
     private List<OpcionRespuestaEntity> opcionesRespuesta;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<TemaCertificacionEntity> temasCertificacion;
+    private Integer orden;
 
     /**
      * Califica la pregunta al determinar si la(s) respuesta(s) escogida(s) es
@@ -178,6 +179,14 @@ public class PreguntaEntity implements Serializable {
 
     public void setTemasCertificacion(List<TemaCertificacionEntity> temasCertificacion) {
         this.temasCertificacion = temasCertificacion;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
     }
 
     @Override

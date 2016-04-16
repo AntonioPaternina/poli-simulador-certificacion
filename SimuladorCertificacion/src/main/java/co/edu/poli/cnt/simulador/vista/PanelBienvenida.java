@@ -1,6 +1,5 @@
 package co.edu.poli.cnt.simulador.vista;
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**
@@ -55,16 +54,9 @@ public class PanelBienvenida extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonComenzarActionPerformed
-        // obtener la vista principal
-        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        // eliminar el panel de bienvenida ...
-        topFrame.remove(this);
-        // reemplazarlo por el panel del examen
-        PanelExamen panelExamen = new PanelExamen();
-        topFrame.add(panelExamen);
-        // volver a pintar la vista principal para que se tomen los cambios        
-        topFrame.revalidate();
-        topFrame.repaint();
+        // mostrar panel del examen
+        VistaPrincipal vistaPrincipal = (VistaPrincipal) SwingUtilities.getWindowAncestor(this);
+        vistaPrincipal.mostrarPanelExamen();
     }//GEN-LAST:event_botonComenzarActionPerformed
 
 

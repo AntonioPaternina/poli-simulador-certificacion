@@ -1,10 +1,20 @@
 package co.edu.poli.cnt.simulador.vista;
 
+import co.edu.poli.cnt.simulador.repositorio.PreguntaRepositorio;
+import co.edu.poli.cnt.simulador.repositorio.PreguntaRepositorioImpl;
+import java.awt.GridBagConstraints;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Antonio Paternina <acpaternina@poli.edu.co>
  */
 public class VistaPrincipal extends javax.swing.JFrame {
+
+    private PanelBienvenida panelBienvenida;
+    private PanelExamen panelExamen;
+    private PanelResultado panelResultado;
 
     /**
      * Creates new form VistaPrincipal
@@ -21,9 +31,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        panelBienvenida1 = new co.edu.poli.cnt.simulador.vista.PanelBienvenida();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -32,14 +40,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         setTitle("Simulador OCPJP8");
         setPreferredSize(new java.awt.Dimension(1280, 800));
         getContentPane().setLayout(new java.awt.GridBagLayout());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 141;
-        gridBagConstraints.ipady = 114;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(16, 6, 0, 6);
-        getContentPane().add(panelBienvenida1, gridBagConstraints);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -79,18 +79,87 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        // inicializar temprano la base de datos
+        PreguntaRepositorioImpl.getInstancia();
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaPrincipal().setVisible(true);
+                VistaPrincipal vistaPrincipal = new VistaPrincipal();
+                vistaPrincipal.mostrarPanelBienvenida();
+                vistaPrincipal.setVisible(true);
             }
         });
+    }
+
+    /**
+     * Muestra el panel de bienvenida en la aplicación
+     */
+    public void mostrarPanelBienvenida() {
+        if (panelBienvenida == null) {
+            panelBienvenida = new PanelBienvenida();
+        }
+        mostrarPanel(panelBienvenida);
+    }
+
+    /**
+     * Muestra el panel del examen en la aplicación
+     */
+    public void mostrarPanelExamen() {
+        eliminarPanel(panelBienvenida);
+        if (panelExamen == null) {
+            panelExamen = new PanelExamen();
+        }
+        mostrarPanel(panelExamen);
+    }
+
+    /**
+     * Muestra el panel de resultado en la aplicación
+     */
+    public void mostrarPanelResultado() {
+        eliminarPanel(panelExamen);
+        if (panelResultado == null) {
+            panelResultado = new PanelResultado();
+        }
+        mostrarPanel(panelResultado);
+    }
+
+    /**
+     * Utilidad que muestra un panel en este JFrame
+     *
+     * @param panel El panel que se desea mostrar
+     */
+    private void mostrarPanel(JPanel panel) {
+        JFrame frame = this;
+        frame.add(panel, calcularConstraints());
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    /**
+     * Utilidad que elimina un panel de este JFrame
+     *
+     * @param panel
+     */
+    private void eliminarPanel(JPanel panel) {
+        JFrame frame = this;
+        frame.remove(panel);
+    }
+
+    private GridBagConstraints calcularConstraints() {
+        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 141;
+        gridBagConstraints.ipady = 114;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 6, 0, 6);
+        return gridBagConstraints;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private co.edu.poli.cnt.simulador.vista.PanelBienvenida panelBienvenida1;
     // End of variables declaration//GEN-END:variables
 }

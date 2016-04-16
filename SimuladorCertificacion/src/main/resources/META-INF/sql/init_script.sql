@@ -1,3 +1,4 @@
+
 -- temas de certificacion
 insert into temacertificacionentity(id, nombre) values (1, 'Java Class Design');
 insert into temacertificacionentity(id, nombre) values (2, 'Polymorphism');
@@ -19,7 +20,7 @@ insert into temacertificacionentity(id, nombre) values (17, 'Lambda Built-in fun
 insert into temacertificacionentity(id, nombre) values (18, 'Exceptions and Assertions');
 
 -- preguntas
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (1, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', '1. public class Overloading {
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (1, 1, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', '1. public class Overloading {
 2. 
 3. 	public static int metodoCualquiera(int a1, int a2) {
 4. 		return a1 + a2;
@@ -33,7 +34,7 @@ insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocod
 12.  		System.out.println(metodoCualquiera(1, 2));
 13.	}
 14. }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (2, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'class Base {
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (2, 2, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'class Base {
 
     Base copy() {
         return new Base();
@@ -59,7 +60,7 @@ public class Derived extends Base {
         System.out.println(base.copy());
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (3, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'package Main;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (3, 3, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'package Main;
 
 public class claseA {
     private int miVar1 = 1;
@@ -92,7 +93,7 @@ public class classC {
 	System.out.println(v1);
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (4, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'package Main;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (4, 4, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'package Main;
 
 public class clase1 {
     public void metodo1() {
@@ -119,7 +120,7 @@ public class clase2 {
     }
 
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (5, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class Principal {
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (5, 5, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class Principal {
     int atri;
 
     public void metedoPrincipal() {
@@ -140,7 +141,7 @@ public class alterna {
 
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (6, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'interface Figura {
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (6, 6, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'interface Figura {
     final default double calcularArea() {
         return 0;
     }
@@ -153,12 +154,12 @@ public class Test implements Figura {
         System.out.println(f.calcularArea());
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (7, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class Caja<T> {
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (7, 7, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class Caja<T> {
     private T t;
 
 Caja<Integer> integerBox = new Box<Integer>();
 Caja<String> stringBox = new Box<String>();');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (8, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class Test<T> {
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (8, 8, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class Test<T> {
 
     T entero;
     T cadena;
@@ -181,7 +182,7 @@ insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocod
         System.out.println(test.getEntero() + test.getCadena());
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (9, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class HIlo extends Thread {
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (9, 9, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class HIlo extends Thread {
     
     public void run(){  
    	   for(int i=1;i<=3;i++){  
@@ -203,7 +204,7 @@ insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocod
    	  t2.start();  
    	  t3.start();  
  }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (10, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class RunnableImpl implements Runnable {
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (10, 10, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'public class RunnableImpl implements Runnable {
     public void run() {
    	 System.out.println("In run(); El nombre del hilo es: " + Thread.currentThread().getName());
     }
@@ -226,7 +227,7 @@ public class Test extends Base {
         System.out.println(base.metodo(-6, 3));
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (11, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.time.LocalDate;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (11, 11, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.time.LocalDate;
 import java.time.Period;
 public class Programa {
     public static void main (String[] args) {
@@ -243,7 +244,7 @@ public class Programa {
    	 }
 
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (12, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.time.LocalDate;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (12, 12, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.time.LocalDate;
 
 public class Test {
 
@@ -252,7 +253,7 @@ public class Test {
         System.out.println(hoy);
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (13, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.sql.Connection;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (13, 13, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -280,7 +281,7 @@ public class Test {
         return DriverManager.getConnection(url, userName, password);
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (14, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.util.Locale;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (14, 14, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Test {
@@ -292,7 +293,7 @@ public class Test {
         System.out.println(resBundle.getString("test"));
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (15, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.io.*;;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (15, 15, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.io.*;;
 
 public class Programa {
     private static final String OUTPUT_File = "C:/Users/Desktop/prueba.txt";
@@ -312,7 +313,7 @@ public class Programa {
     }
 
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (16, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.io.*;;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (16, 16, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.io.*;;
 
 public class Programa implements Serializable {
     private static final long serilVersionUID = 8309080721495266420L;
@@ -378,7 +379,7 @@ public class SalidaObjeto {
     }
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (17, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.io.*;;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (17, 17, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.io.*;;
 
 public class Programa {
     public static void main(String[] args) {
@@ -399,7 +400,7 @@ public class Programa {
    	 }
     }    
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (18, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.util.function.Predicate;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (18, 18, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.util.function.Predicate;
 
 public class Test {
 
@@ -412,7 +413,7 @@ public class Test {
         System.out.println(validarNuloYCero.test(enteroPrueba));
     }
 }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (19, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', '1. class NoEmiteSonido extends Exception {
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (19, 19, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', '1. class NoEmiteSonido extends Exception {
 2. }
 3. 
 4. interface Ruidoso {
@@ -439,7 +440,7 @@ insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocod
 25.         System.out.print("vuela ");
 26.     }
 27. }');
-insert into preguntaentity(id, tipopregunta, textoinicio, textofin, fragmentocodigo) values (20, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.util.regex.Pattern;
+insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragmentocodigo) values (20, 20, 'SELECCION_UNICA', 'Considere el siguiente fragmento de código:', 'Escoja la opción correcta basada en el fragmento de código anterior:', 'import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Test {

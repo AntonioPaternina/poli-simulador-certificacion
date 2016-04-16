@@ -29,7 +29,7 @@ public class OpcionRespuestaEntity implements Serializable {
     @Lob
     private String contenido;
     private boolean opcionCorrecta;
-    private int orden;
+    private Integer orden;
     @Transient
     private boolean elegida;
     @ManyToOne
@@ -78,11 +78,11 @@ public class OpcionRespuestaEntity implements Serializable {
         this.elegida = elegida;
     }
 
-    public int getOrden() {
+    public Integer getOrden() {
         return orden;
     }
 
-    public void setOrden(int orden) {
+    public void setOrden(Integer orden) {
         this.orden = orden;
     }
 
@@ -100,7 +100,6 @@ public class OpcionRespuestaEntity implements Serializable {
         hash = 97 * hash + Objects.hashCode(this.id);
         hash = 97 * hash + Objects.hashCode(this.contenido);
         hash = 97 * hash + (this.opcionCorrecta ? 1 : 0);
-        hash = 97 * hash + this.orden;
         hash = 97 * hash + (this.elegida ? 1 : 0);
         hash = 97 * hash + Objects.hashCode(this.pregunta);
         return hash;
@@ -119,9 +118,6 @@ public class OpcionRespuestaEntity implements Serializable {
         }
         final OpcionRespuestaEntity other = (OpcionRespuestaEntity) obj;
         if (this.opcionCorrecta != other.opcionCorrecta) {
-            return false;
-        }
-        if (this.orden != other.orden) {
             return false;
         }
         if (this.elegida != other.elegida) {
