@@ -62,7 +62,7 @@ public class PanelExamen extends JPanel {
         mostrarPreguntaActual();
 
         // iniciar el temporizador
-        this.temporizador.inicializar(60 * 120 - 1, new ActionListener() {
+        this.temporizador.inicializar(60 * 100 - 1, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // mostrar panel de resultado
@@ -169,6 +169,7 @@ public class PanelExamen extends JPanel {
 
         panelEncabezado = new javax.swing.JPanel();
         temporizador = new co.edu.poli.cnt.simulador.vista.Temporizador();
+        jLabel1 = new javax.swing.JLabel();
         panelNavegadorDePreguntas = new javax.swing.JPanel();
         scrollPaneListaPreguntas = new javax.swing.JScrollPane();
         listaPreguntas = new javax.swing.JList<>();
@@ -187,12 +188,17 @@ public class PanelExamen extends JPanel {
 
         panelEncabezado.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setText("Simulador de Certificación OCPJP8");
+
         javax.swing.GroupLayout panelEncabezadoLayout = new javax.swing.GroupLayout(panelEncabezado);
         panelEncabezado.setLayout(panelEncabezadoLayout);
         panelEncabezadoLayout.setHorizontalGroup(
             panelEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEncabezadoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(313, 313, 313)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(temporizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -200,8 +206,10 @@ public class PanelExamen extends JPanel {
             panelEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEncabezadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(temporizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGroup(panelEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(temporizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         panelNavegadorDePreguntas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -233,7 +241,7 @@ public class PanelExamen extends JPanel {
             panelNavegadorDePreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNavegadorDePreguntasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollPaneListaPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)
+                .addComponent(scrollPaneListaPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -349,7 +357,7 @@ public class PanelExamen extends JPanel {
                 .addComponent(panelEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelNavegadorDePreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
+                    .addComponent(panelNavegadorDePreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelPregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -395,6 +403,7 @@ public class PanelExamen extends JPanel {
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JButton botonTerminar;
     private javax.swing.JCheckBox checkMarcar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JList<PreguntaEntity> listaPreguntas;
     private javax.swing.JPanel panelControles;
     private javax.swing.JPanel panelEncabezado;
