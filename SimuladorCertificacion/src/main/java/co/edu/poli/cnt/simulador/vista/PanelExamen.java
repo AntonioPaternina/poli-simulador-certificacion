@@ -184,7 +184,7 @@ public class PanelExamen extends JPanel {
         scrollAreaRespuestas = new javax.swing.JScrollPane();
         panelRespuestas = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(1280, 800));
+        setPreferredSize(new java.awt.Dimension(900, 600));
 
         panelEncabezado.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -328,7 +328,7 @@ public class PanelExamen extends JPanel {
         panelPreguntaLayout.setVerticalGroup(
             panelPreguntaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPreguntaLayout.createSequentialGroup()
-                .addComponent(scrollAreaPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollAreaPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollAreaRespuestas)
                 .addContainerGap())

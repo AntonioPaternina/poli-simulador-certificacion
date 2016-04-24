@@ -31,7 +31,7 @@ public class PanelBienvenida extends javax.swing.JPanel {
         botonComenzar = new javax.swing.JButton();
         GlueHorizontalDespues = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
 
-        setPreferredSize(new java.awt.Dimension(1280, 800));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
