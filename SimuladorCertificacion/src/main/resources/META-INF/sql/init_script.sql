@@ -76,11 +76,11 @@ insert into preguntaentity(id, orden, tipopregunta, textoinicio, textofin, fragm
 
 public class clase1 {
     public void metodo1() {
-   	 System.out.println("método publico");
+   	 System.out.println("metodo publico");
     }
 
     private void metodo2() {
-   	 System.out.println("método privado");
+   	 System.out.println("metodo privado");
     }
 
     protected void metodo3() {
@@ -447,10 +447,10 @@ insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, conten
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 3, 4, false, 'No es posible acceder a la variable miVar1 en claseB, No es posible acceder a la variable miVar3 en claseC, No es posible acceder a la variable miVar1 en claseC');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 3, 5, false, 'Se imprime en consola; 3 2');
 
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 4, 1, true, 'Se Imprime en consola: método publico');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 4, 2, false, 'se obtiene un error de compilacion,porque el  método no es visible');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 4, 1, true, 'Se Imprime en consola: metodo publico');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 4, 2, false, 'se obtiene un error de compilacion,porque el  metodo no es visible');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 4, 3, false, 'Se imprime en consola: Metodo protegido');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 4, 4, false, 'Se imprime método publico Metodo protegido, debido a que las clases están contenidas en el mismo paquete');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 4, 4, false, 'Se imprime metodo publico Metodo protegido, debido a que las clases estan contenidas en el mismo paquete');
 
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 5, 1, true, 'Se imprime en consola: imprime');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 5, 2, false, 'El codigo compila pero no se imprime nada en consola');
@@ -458,21 +458,21 @@ insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, conten
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 5, 4, false, 'El codigo no compila porque hay  que instanciar  primero un objeto de la clase principal para poder crear una instancia en de la clase secundaria');
 
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 6, 1, true, 'Se imprime en consola: 1');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 6, 2, false, 'El codigo no compila puesto que la interfaz Figura solo puede declarar métodos abstractos y no una implementacion');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 6, 3, false, 'El codigo no compila puesto que el método calcularArea debe retornar un double y está retornando un literal entero');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 6, 4, false, 'El codigo no compila puesto que el método calcularArea no puede ser declarado como final');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 6, 5, false, 'El codigo no compila puesto que como la clase Test no es abstracta entonces debe implementar el método calcularArea() declarado en la interfaz Figura');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 6, 2, false, 'El codigo no compila puesto que la interfaz Figura solo puede declarar metodos abstractos y no una implementacion');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 6, 3, false, 'El codigo no compila puesto que el metodo calcularArea debe retornar un double y esta retornando un literal entero');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 6, 4, false, 'El codigo no compila puesto que el metodo calcularArea no puede ser declarado como final');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 6, 5, false, 'El codigo no compila puesto que como la clase Test no es abstracta entonces debe implementar el metodo calcularArea() declarado en la interfaz Figura');
 
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 7, 1, true, 'Son objetos de la clase caja, con tipos enteros y cadena');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 7, 2, false, 'La clase caja extiende de la clase <T> y se crean objetos');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 7, 3, false, 'Se crean objetos de tipo Integer y String dentro de una coleccion de tipo <T>');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 7, 4, false, 'Se declara la clase Caja  con un tipo  genérico <T> que indica que la clase puede tener un conjuntos de tipos y luego se crean los tipos de cajas que almacenaran tipos  Integer y String');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 7, 4, false, 'Se declara la clase Caja  con un tipo  generico <T> que indica que la clase puede tener un conjuntos de tipos y luego se crean los tipos de cajas que almacenaran tipos  Integer y String');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 7, 5, false, 'Se obtiene la excepcion NumberFormatException al tratar de interpretar la cadena "prueba" como un numero para poderla utilizar en la operacion de suma');
 
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 8, 1, true, 'Se Imprime en consola: 600prueba');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 8, 2, false, 'Se obtiene una excepcion en tiempo de ejecucion puesto que la operacion "+" no está definida para los tipos Integer + String');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 8, 3, false, 'Se obtiene error de compilacion puesto que se usa un numero incorrecto de argumentos de tipo genérico al declarar la variable test');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 8, 4, false, 'Se obtiene un error de compilacion puesto que la clase Test espera un argumento de tipo genérico y se está instanciando new Test<> sin ningun argumento');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 8, 2, false, 'Se obtiene una excepcion en tiempo de ejecucion puesto que la operacion "+" no esta definida para los tipos Integer + String');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 8, 3, false, 'Se obtiene error de compilacion puesto que se usa un numero incorrecto de argumentos de tipo generico al declarar la variable test');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 8, 4, false, 'Se obtiene un error de compilacion puesto que la clase Test espera un argumento de tipo generico y se esta instanciando new Test<> sin ningun argumento');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 8, 5, false, 'Se obtiene la excepcion NumberFormatException al tratar de interpretar la cadena "prueba" como un numero para poderla utilizar en la operacion de suma');
 
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 9, 1, true, 'Se imprime en consola: 123');
@@ -492,13 +492,13 @@ insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, conten
 
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 12, 1, true, 'El codigo compila bien pero se lanza una excepcion DateTimeException porque el año no puede ser menor a 1970 (tiempo Unix/POSIX).');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 12, 2, false, 'Se imprime en consola: 1969-03-31');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 12, 3, false, 'El codigo compila bien pero se lanza la excepcion DateTimeException en tiempo de ejecucion porque el mes es inválido');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 12, 3, false, 'El codigo compila bien pero se lanza la excepcion DateTimeException en tiempo de ejecucion porque el mes es invalido');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 12, 4, false, 'Se imprime en consola: 1969-31-03');
 
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 13, 1, true, 'ocurre un error de compilacion puesto que no se ha llamado close() en los recursos: Connection, Statement y ResultSet');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 13, 2, false, 'se imprime en consola: 1 - test');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 13, 3, false, 'el codigo compila y ejecuta sin errores pero no se imprime nada en consola');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 13, 4, false, 'Se lanza la excepcion SQLException ya que la columna está fuera de rango');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 13, 4, false, 'Se lanza la excepcion SQLException ya que la columna esta fuera de rango');
 
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 14, 1, true, 'Se imprime en consola: test');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 14, 2, false, 'Se imprime en consola: prueba');
@@ -525,12 +525,12 @@ insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, conten
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 18, 3, false, 'el codigo no compila puesto que test no puede recibir null como argumento');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 18, 4, false, 'se imprime en consola true puesto que no se cumple ninguno de los predicados y se supera la prueba');
 
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 19, 1, true, 'el codigo no compila puesto que la clase Terrestre implementa Atacante pero no implementa el método atacar()');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 19, 2, false, 'el codigo no compila, sin embargo, para que el codigo compile correctamente es necesario que la clase Pato implemente correctamente los métodos atacar() y sonar()');
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 19, 3, false, 'el codigo no compila, sin embargo, para que el codigo compile correctamente es necesario que la clase Pato implemente correctamente el método atacar()');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 19, 1, true, 'el codigo no compila puesto que la clase Terrestre implementa Atacante pero no implementa el metodo atacar()');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 19, 2, false, 'el codigo no compila, sin embargo, para que el codigo compile correctamente es necesario que la clase Pato implemente correctamente los metodos atacar() y sonar()');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 19, 3, false, 'el codigo no compila, sin embargo, para que el codigo compile correctamente es necesario que la clase Pato implemente correctamente el metodo atacar()');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 19, 4, false, 'el codigo compila correctamente');
 
-insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 20, 1, true, 'el codigo no compila puesto que count() no está definido');
+insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 20, 1, true, 'el codigo no compila puesto que count() no esta definido');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 20, 2, false, 'se arroja la excepcion IllegalStateException');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 20, 3, false, 'se imprime en consola: 4');
 insert into opcionrespuestaentity(id, pregunta_id, orden, opcioncorrecta, contenido) values (next value for hibernate_sequence, 20, 4, false, 'se imprime en consola 5');
